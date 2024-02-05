@@ -1,13 +1,32 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import todo from "../assets/requirement.png"
 import { FaPlus } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
-import { Input } from 'postcss';
+
+
+// get data from local storage
+const getData = ()=>{
+    let Data = localStorage.getItem("item")
+//    console.log("ddd", Data);
+if (Data) {
+   return  JSON.parse(localStorage.getItem("item"))
+} else {
+    
+}
+}
+
 
 const Todo = () => {
     const [InputData, setInputData] = useState(""); 
-    const [myData, setmyData] = useState([]);
+    const [myData, setmyData] = useState(getData());
     console.log("my data", myData);
+   
+    // add data to local storage
+   
+    useEffect(() => {
+       localStorage.setItem("item", JSON.stringify(myData))
+    }, [myData]);
+
     
     
     const addTitle=()=>{
